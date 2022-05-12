@@ -1,0 +1,9 @@
+host: "0.0.0.0"
+port: 8899
+enable_swagger: true
+logger:
+  path: /var/app/logs
+  maxSize: 512
+  maxAge: 15
+  maxBackups: 10
+  compress: false

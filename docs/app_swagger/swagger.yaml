@@ -1,0 +1,85 @@
+definitions:
+  api.TResp:
+    properties:
+      message:
+        type: string
+    type: object
+  errs.PraticeException:
+    properties:
+      detail:
+        type: string
+      error_code:
+        type: string
+      msg:
+        type: string
+      request:
+        type: string
+      status_code:
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/test:
+    get:
+      consumes:
+      - application/json
+      description: tool component info api
+      parameters:
+      - description: namespace
+        in: query
+        name: namespace
+        required: true
+        type: string
+      - description: tool name
+        in: path
+        name: toolName
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.TResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errs.PraticeException'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/errs.PraticeException'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/errs.PraticeException'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/errs.PraticeException'
+      summary: get tool component info
+      tags:
+      - test
+  /health/liveness:
+    get:
+      consumes:
+      - application/json
+      description: liveness api
+      responses:
+        "200":
+          description: ""
+      summary: get liveness message
+      tags:
+      - health
+  /health/readiness:
+    get:
+      consumes:
+      - application/json
+      description: readiness api
+      responses:
+        "200":
+          description: ""
+      summary: get readiness message
+      tags:
+      - health
+swagger: "2.0"
